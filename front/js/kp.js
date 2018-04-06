@@ -9,12 +9,16 @@ $(document).on('click', '#kpa-submit', returnReload);
 
 function returnReload(){
 	var data = $('#connect_id').val();
+	
 	$.ajax({
-		url: 'http://116.39.0.146:7777/connect',
+		url: 'http://localhost:7777/connect',
 		type: 'POST',
 		data: data,
 		success: function(data){
 			console.log(data)
+		},
+		error: function(){
+			console.log('failed')
 		}
 	});
 }
