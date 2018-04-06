@@ -12,6 +12,20 @@ $(document).on('click', '#proto-btn2', protoDetail2);
 $(document).on('click', '#proto-final', protoFinal);
 
 var uuid;
+var hid = 0;
+
+function getLoop(){
+	setInterval(function(){
+		getPage();
+		if ($('#hidden').val() != hid){
+			hid = $('#hidden').val();
+			if (hid == 1) tabMove();
+			else if (hid == 2) protoList();
+			else if (hid == 3) protoDetail1();
+			else if (hid == 4) protoDetail2();
+		}
+	}, 1000);
+}
 
 function setPage(pageno){
 	$.ajax({
@@ -33,7 +47,7 @@ function getPage(){
 		type: 'POST',
 		data: { 'uuid' : uuid },
 		success: function(data){
-			console.log(data)
+			$('#hidden').val(data);
 		},
 		error: function(error){
 			console.log(error)
@@ -47,7 +61,8 @@ function protoFinal(){
 
 function protoDetail1(){
 	if ($('.highlighted').length == 0){
-		$(this).addClass('highlighted');		
+		$(this).addClass('highlighted');
+		setPage(3);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
@@ -58,7 +73,8 @@ function protoDetail1(){
 
 function protoDetail2(){
 	if ($('.highlighted').length == 0){
-		$(this).addClass('highlighted');		
+		$(this).addClass('highlighted');
+		setPage(4);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
@@ -69,12 +85,13 @@ function protoDetail2(){
 
 function protoList(){
 	if ($('.highlighted').length == 0){
-		$(this).addClass('highlighted');		
+		$(this).addClass('highlighted');
+		setPage(2);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
 		$('#proto1').addClass('active');
-		$('#proto-0').addClass('active');	
+		$('#proto-0').addClass('active');
 	}
 }
 
@@ -132,7 +149,8 @@ function tabMove(){
 		setPage(1);
 	} else {
 		$('.highlighted').removeClass('highlighted');
-		$(this).addClass('active').siblings().removeClass('active');
-		$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');
+		$('#top-nav > a').eq(0).addClass('active').siblings().removeClass('active');
+		/*$(this).addClass('active').siblings().removeClass('active');
+		$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');*/
 	}
 }
