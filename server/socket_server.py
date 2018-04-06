@@ -40,6 +40,7 @@ class ConnectionManager:
         connections[uuid].send(msg.encode())
 
     def handle_message(self, msg, conn):
+        print(msg)
         try:
             unpack_msg = json.loads(msg)
             msg_type = unpack_msg['msg_type']
@@ -52,12 +53,11 @@ class ConnectionManager:
                 print('Logout {}'.format(uuid))
                 self.remove_connection(uuid)
             elif msg_type == 'screen_update':
-                print('Update {}'.format(unpack_msg['screen_update']))
-                update_screen(unpack_msg['screen_update'], unpack_msg['current_screen'])
+                print('Update {}'.format(unpack_msg['current_screen']))
+                update_screen(uuid, unpack_msg['current_screen'])
 
         except Exception as e:
-            print("Error" + e)
-        print(msg)
+            print("Error" + str(e))
 
 
 class TcpHandler(socketserver.BaseRequestHandler):
