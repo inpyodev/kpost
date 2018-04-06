@@ -4,6 +4,11 @@ $(document).on('click', '#btn-nav', openDrawer);
 $(document).on('click', '#drawer-close', closeDrawer);
 $(document).on('click', '#drawer-left > a', menuDrawer);
 $(document).on('click', '.drawer-menu > li.plus > a', menu2dpsDrawer);
+$(document).on('ajax:complete', '#kpa-form', returnReload);
+
+function returnReload(){
+	window.location.href = 'webapp.html';
+}
 
 function menu2dpsDrawer(){
 	if ($(this).parent().hasClass('active')) $(this).parent().removeClass('active');
