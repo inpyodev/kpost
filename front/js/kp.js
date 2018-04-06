@@ -9,23 +9,56 @@ $(document).on('click', '#kpa-submit', returnReload);
 $(document).on('click', '#btn-more', protoList);
 $(document).on('click', '#proto-btn1', protoDetail1);
 $(document).on('click', '#proto-btn2', protoDetail2);
+$(document).on('click', '#proto-final', protoFinal);
+
+var uuid;
+
+function getPage(){
+	$.ajax({
+		url: 'http://116.39.0.146:5000/getScreen',
+		type: 'POST',
+		data: uuid,
+		success: function(data){
+			console.log(data)
+		}
+	});
+}
+
+function protoFinal(){
+	$(this).addClass('highlighted');
+}
 
 function protoDetail1(){
-	$('#proto1').scrollTop(0);
-	$('#proto-0').removeClass('active');
-	$('#proto-1').addClass('active');
+	if ($('.highlighted').length == 0){
+		$(this).addClass('highlighted');		
+	} else {
+		$('.highlighted').removeClass('highlighted');
+		$('#proto1').scrollTop(0);
+		$('#proto-0').removeClass('active');
+		$('#proto-1').addClass('active');
+	}	
 }
 
 function protoDetail2(){
-	$('#proto1').scrollTop(0);
-	$('#proto-1').removeClass('active');
-	$('#proto-2').addClass('active');
+	if ($('.highlighted').length == 0){
+		$(this).addClass('highlighted');		
+	} else {
+		$('.highlighted').removeClass('highlighted');
+		$('#proto1').scrollTop(0);
+		$('#proto-1').removeClass('active');
+		$('#proto-2').addClass('active');
+	}
 }
 
 function protoList(){
-	$('#proto1').scrollTop(0);
-	$('#proto1').addClass('active');
-	$('#proto-0').addClass('active');	
+	if ($('.highlighted').length == 0){
+		$(this).addClass('highlighted');		
+	} else {
+		$('.highlighted').removeClass('highlighted');
+		$('#proto1').scrollTop(0);
+		$('#proto1').addClass('active');
+		$('#proto-0').addClass('active');	
+	}
 }
 
 function returnReload(){
@@ -36,7 +69,9 @@ function returnReload(){
 		type: 'POST',
 		data: data,
 		success: function(data){
-			console.log(data)
+			uuid = data.uuid;
+			console.log(uuid, data.uuid)
+			closeDrawer();
 		},
 		error: function(error){
 			console.log(error)
@@ -74,6 +109,11 @@ function openCloseBar(){
 }
 
 function tabMove(){
-	$(this).addClass('active').siblings().removeClass('active');
-	$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');
+	if ($('.highlighted').length == 0){
+		$(this).addClass('highlighted');
+	} else {
+		$('.highlighted').removeClass('highlighted');
+		$(this).addClass('active').siblings().removeClass('active');
+		$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');
+	}
 }
