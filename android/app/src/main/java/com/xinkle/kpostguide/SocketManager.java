@@ -17,6 +17,12 @@ import java.util.Iterator;
 
 public class SocketManager {
     private static SocketManager INSTANCE = null;
+    private String mUUID;
+
+    public static SocketManager getInstance() {
+        if (INSTANCE != null) return INSTANCE;
+        return null;
+    }
 
     public static SocketManager getInstance(String ip, int port, Handler h) {
         if (INSTANCE == null) INSTANCE = new SocketManager(ip, port, h);
@@ -42,6 +48,15 @@ public class SocketManager {
         // thread objects의 작업 할당 및 초기화
         m_readData = new readDataThread();
         m_readData.start();
+    }
+
+    public void changeHandler(Handler h) {
+        this.m_handler = h;
+    }
+
+    public void setmUUID(String uuid) {mUUID = uuid;}
+    public String getmUUID() {
+        return mUUID;
     }
 
     // m_createSocket thread 안에서 실행

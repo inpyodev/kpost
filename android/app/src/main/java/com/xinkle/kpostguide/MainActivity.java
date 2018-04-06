@@ -1,9 +1,11 @@
 package com.xinkle.kpostguide;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,8 +29,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button btnGo = findViewById(R.id.btnGo);
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,KPostActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button btnRequestSupport = findViewById(R.id.btnRequestSupport);
-        final TextView tvResponse = findViewById(R.id.tvResponse);
+        final TextView tvRequestID = findViewById(R.id.tvRequestID);
+        final TextView tvUUID = findViewById(R.id.tvUUID);
 
         btnRequestSupport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +57,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
                             String body = response.body().string();
-                            body = new JSONObject(body).getString("uuid");
-                            tvResponse.setText(body);
+                            String request_id = new JSONObject(body).getString("request_id");
+                            String uuid = new JSONObject(body).getString("uuid");
+                            tvRequestID.setText(request_id);
+                            tvUUID.setText(uuid);
 
                             mSocket = SocketManager.getInstance("116.39.0.146", 7778, m_Handler);
+                            mSocket.setmUUID(uuid);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -71,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonob = new JSONObject();
                 try {
                     jsonob.put("msg_type", "login");
-                    jsonob.put("uuid", tvResponse.getText().toString());
+                    jsonob.put("uuid", mSocket.getmUUID());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 1: // 데이터 수신 완료
                     // 수신 데이터 토스트로 띄움.
-                     break;
+                    Log.d("KPOST", msg.obj.toString());
+
+                    if (msg.obj.toString().equals("Connected")) {
+                        Intent intent=new Intent(MainActivity.this,KPostActivity.class);
+                        startActivity(intent);
+                    }
+                    break;
             }
         }
     };

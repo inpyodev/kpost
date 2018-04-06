@@ -15,17 +15,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvResponse"
+        android:id="@+id/tvRequestID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@id/btnRequestSupport" />
 
+    <TextView
+        android:id="@+id/tvUUID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestID" />
+
+
     <Button
         android:id="@+id/btnSocketConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvResponse" />
+        app:layout_constraintTop_toBottomOf="@id/tvUUID" />
 
     <TextView
         android:id="@+id/tvSocket"
@@ -33,5 +41,14 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@id/btnSocketConnect" />
+
+    <Button
+        android:id="@+id/btnGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="331dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
