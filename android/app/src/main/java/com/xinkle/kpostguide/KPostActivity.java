@@ -61,7 +61,7 @@ public class KPostActivity extends Activity{
                     Log.d("KPOST", msg.obj.toString());
 
                     if (msg.obj.toString().equals("1")) {
-                        btnYegum.setBackgroundColor(Color.BLUE);
+                        btnYegum.setBackgroundColor(Color.rgb(204,204,255));
                     } else if(msg.obj.toString().equals("2")) {
                         img.setImageResource(R.drawable.kp_tab1_app_hl);
                         img.setOnClickListener(new View.OnClickListener() {

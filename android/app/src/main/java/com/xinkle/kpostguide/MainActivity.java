@@ -29,72 +29,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnGo = findViewById(R.id.btnGo);
-        btnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,KPostActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btnRequestSupport = findViewById(R.id.btnRequestSupport);
         final TextView tvRequestID = findViewById(R.id.tvRequestID);
-        final TextView tvUUID = findViewById(R.id.tvUUID);
 
-        btnRequestSupport.setOnClickListener(new View.OnClickListener() {
+        Retrofit retrofit;
+        ApiService apiService;
+
+        retrofit = new Retrofit.Builder().baseUrl(ApiService.API_URL).build();
+        apiService = retrofit.create(ApiService.class);
+
+        Call<ResponseBody> response = apiService.request("0.0.0.0");
+        response.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onClick(View view) {
-                Retrofit retrofit;
-                ApiService apiService;
-
-                retrofit = new Retrofit.Builder().baseUrl(ApiService.API_URL).build();
-                apiService = retrofit.create(ApiService.class);
-
-                Call<ResponseBody> response = apiService.request("0.0.0.0");
-                response.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try {
-                            String body = response.body().string();
-                            String request_id = new JSONObject(body).getString("request_id");
-                            String uuid = new JSONObject(body).getString("uuid");
-                            tvRequestID.setText(request_id);
-                            tvUUID.setText(uuid);
-
-                            mSocket = SocketManager.getInstance("116.39.0.146", 7778, m_Handler);
-                            mSocket.setmUUID(uuid);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
-            }
-        });
-
-        Button btnSocketConnect = findViewById(R.id.btnSocketConnect);
-        btnSocketConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                JSONObject jsonob = new JSONObject();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    jsonob.put("msg_type", "login");
-                    jsonob.put("uuid", mSocket.getmUUID());
+                    String body = response.body().string();
+                    String request_id = new JSONObject(body).getString("request_id");
+                    String uuid = new JSONObject(body).getString("uuid");
+                    tvRequestID.setText(request_id);
+
+                    mSocket = SocketManager.getInstance("116.39.0.146", 7778, m_Handler);
+                    mSocket.setmUUID(uuid);
+
+                    Thread.sleep(1000);
+
+                    JSONObject jsonob = new JSONObject();
+                    try {
+                        jsonob.put("msg_type", "login");
+                        jsonob.put("uuid", mSocket.getmUUID());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    mSocket.sendData(jsonob.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                mSocket.sendData(jsonob.toString());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
-
-
     }
 
     private Handler m_Handler = new Handler() {
