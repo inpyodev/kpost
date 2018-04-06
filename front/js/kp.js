@@ -68,8 +68,9 @@ function returnReload(){
 		url: 'http://116.39.0.146:7777/connect',
 		type: 'POST',
 		data: data,
+		dataType: 'JSON',
 		success: function(data){
-			uuid = data['uuid'];
+			uuid = data.uuid;
 			console.log(uuid, data.uuid)
 			closeDrawer();
 		},
