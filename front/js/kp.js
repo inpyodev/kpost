@@ -69,7 +69,7 @@ function returnReload(){
 		type: 'POST',
 		data: data,
 		success: function(data){
-			uuid = data.uuid;
+			uuid = data['uuid'];
 			console.log(uuid, data.uuid)
 			closeDrawer();
 		},
