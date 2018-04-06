@@ -26,7 +26,7 @@ function getLoop(){
 			else if (hid == 3) protoDetail1();
 			else if (hid == 4) protoDetail2();
 		}
-	}, 2000);
+	}, 1000);
 }
 
 function setPage(pageno){
@@ -60,6 +60,7 @@ function getPage(){
 function protoFinal(){
 	$(this).addClass('highlighted');
 	clearInterval(inter);
+	setPage(5);
 }
 
 function protoDetail1(){
