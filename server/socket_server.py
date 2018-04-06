@@ -8,7 +8,13 @@ PORT = 7778
 lock = threading.Lock()  # syncronized 동기화 진행하는 스레드 생성
 connections = {}
 
-def update_screen(param):
+def update_screen(uuid, current_screen):
+    req = KPostRequest.query \
+        .filter_by(uuid=uuid) \
+        .first()
+
+    req.current_screen = current_screen
+    db.session.commit()
     pass
 
 
@@ -47,7 +53,7 @@ class ConnectionManager:
                 self.remove_connection(uuid)
             elif msg_type == 'screen_update':
                 print('Update {}'.format(unpack_msg['screen_update']))
-                update_screen(unpack_msg['screen_update'])
+                update_screen(unpack_msg['screen_update'], unpack_msg['current_screen'])
 
         except Exception as e:
             print("Error" + e)
