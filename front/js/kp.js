@@ -4,10 +4,19 @@ $(document).on('click', '#btn-nav', openDrawer);
 $(document).on('click', '#drawer-close', closeDrawer);
 $(document).on('click', '#drawer-left > a', menuDrawer);
 $(document).on('click', '.drawer-menu > li.plus > a', menu2dpsDrawer);
-$(document).on('ajax:complete', '#kpa-form', returnReload);
+//$(document).on('submit', '#kpa-form', returnReload);
+$(document).on('click', '#kpa-submit', returnReload);
 
 function returnReload(){
-	window.location.href = 'webapp.html';
+	var data = $('#connect_id').val();
+	$.ajax({
+		url: 'http://116.39.0.146:7777/connect',
+		type: 'POST',
+		data: data,
+		success: function(data){
+			console.log(data)
+		}
+	});
 }
 
 function menu2dpsDrawer(){
