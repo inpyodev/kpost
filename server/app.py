@@ -43,6 +43,9 @@ def connect():
     req.request_id = ''
     db.session.commit()
 
+    conn = ConnectionManager()
+    conn.send_message(req.uuid, "Connected")
+
     return req.__repr__()
 
 
