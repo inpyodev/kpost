@@ -36,7 +36,7 @@ def register():
 @app.route('/connect', methods=["POST"])
 def connect():
     connect_id = request.form['connect_id']
-    req: Request = Request.query \
+    req = Request.query \
         .filter_by(request_id=connect_id) \
         .first()
 
