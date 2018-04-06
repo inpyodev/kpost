@@ -1,5 +1,15 @@
 $(document).on('click', '#barbtn', openCloseBar);
 $(document).on('click', '#top-nav > a', tabMove);
+$(document).on('click', '#btn-nav', openDrawer);
+$(document).on('click', '#drawer-close', closeDrawer);
+
+function openDrawer(){
+	$('body').addClass('drawer');
+}
+
+function closeDrawer(){
+	$('body').removeClass('drawer');
+}
 
 function openCloseBar(){
 	if ($('#bar').hasClass('opened')){
