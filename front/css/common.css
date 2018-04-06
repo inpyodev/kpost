@@ -1,0 +1,18 @@
+/* Font Family */
+@font-face{ font-family:'Nanum Gothic'; src:url(../fonts/NanumGothic-Regular.ttf) format('truetype'); font-weight:400; }
+@font-face{ font-family:'Nanum Gothic'; src:url(../fonts/NanumGothic-Regular.ttf) format('truetype'); font-weight:700; }
+
+/* Reset */
+*, *:after, *:before { -webkit-box-sizing:border-box; box-sizing:border-box; }
+html, body { position:relative; display:block; min-width:100%; min-height:100%; }
+html, body, div, p, span, a, ul, li, input, textarea { margin:0; padding:0; border:0; font-family:'Nanum Gothic', sans-serif; font-size:16px; line-height:1; letter-spacing:0; color:inherit; }
+a, a:hover, a:visited { text-decoration:none; }
+ul { list-style:none; }
+table { border-collapse:collapse; border-spacing:0; }
+
+#mobile { display:inline-block; border-radius:20px; background:#000; padding:40px 10px; margin:10px; }
+#screen { position:relative; display:block; margin:0 auto; width:380px; height:600px; background:#fff; }
+
+
+
+
