@@ -65,6 +65,8 @@ body.drawer #drawer { left:0; }
 .drawer-menu > li > ul > li { display:block; }
 .drawer-menu > li > ul > li > a { display:block; font-size:14px; padding:15px 10px; }
 
-
-
+#kpa { display:block; width:100%; background:#fff; padding:15px 10px; }
+.kpa-label { line-height:20px; margin-bottom:10px; }
+#connect_id { display:block; border:1px solid #ccc; width:100%; padding:5px; margin-bottom:10px; }
+#kpa-submit { width:100%; text-align:center; background:#c71314; padding:10px; border:0; color:#fff; font-weight:bold; }
 
