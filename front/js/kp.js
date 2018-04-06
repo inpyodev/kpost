@@ -6,6 +6,27 @@ $(document).on('click', '#drawer-left > a', menuDrawer);
 $(document).on('click', '.drawer-menu > li.plus > a', menu2dpsDrawer);
 //$(document).on('submit', '#kpa-form', returnReload);
 $(document).on('click', '#kpa-submit', returnReload);
+$(document).on('click', '#btn-more', protoList);
+$(document).on('click', '#proto-btn1', protoDetail1);
+$(document).on('click', '#proto-btn2', protoDetail2);
+
+function protoDetail1(){
+	$('#proto1').scrollTop(0);
+	$('#proto-0').removeClass('active');
+	$('#proto-1').addClass('active');
+}
+
+function protoDetail2(){
+	$('#proto1').scrollTop(0);
+	$('#proto-1').removeClass('active');
+	$('#proto-2').addClass('active');
+}
+
+function protoList(){
+	$('#proto1').scrollTop(0);
+	$('#proto1').addClass('active');
+	$('#proto-0').addClass('active');	
+}
 
 function returnReload(){
 	var data = $('#kpa-form').serialize();
