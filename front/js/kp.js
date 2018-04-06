@@ -12,7 +12,7 @@ $(document).on('click', '#proto-btn2', protoDetail2);
 $(document).on('click', '#proto-final', protoFinal);
 
 var uuid;
-var hid = 1;
+var hid = 0;
 var inter;
 
 function getLoop(){
@@ -21,10 +21,10 @@ function getLoop(){
 		console.log(hid);
 		if ($('#hidden').val() != hid){
 			hid = $('#hidden').val();
-			if (hid == 2) tabMove();
-			else if (hid == 3) protoList();
-			else if (hid == 4) protoDetail1();
-			else if (hid == 5) protoDetail2();
+			if (hid == 1) tabMove();
+			else if (hid == 2) protoList();
+			else if (hid == 3) protoDetail1();
+			else if (hid == 4) protoDetail2();
 		}
 	}, 2000);
 }
@@ -65,7 +65,7 @@ function protoFinal(){
 function protoDetail1(){
 	if ($('.highlighted').length == 0){
 		$(this).addClass('highlighted');
-		setPage(4);
+		setPage(3);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
@@ -77,7 +77,7 @@ function protoDetail1(){
 function protoDetail2(){
 	if ($('.highlighted').length == 0){
 		$(this).addClass('highlighted');
-		setPage(5);
+		setPage(4);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
@@ -89,7 +89,7 @@ function protoDetail2(){
 function protoList(){
 	if ($('.highlighted').length == 0){
 		$(this).addClass('highlighted');
-		setPage(3);
+		setPage(2);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#proto1').scrollTop(0);
@@ -150,7 +150,7 @@ function openCloseBar(){
 function tabMove(){
 	if ($('.highlighted').length == 0){
 		$(this).addClass('highlighted');
-		setPage(2);
+		setPage(1);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#top-nav > a').eq(0).addClass('active').siblings().removeClass('active');
