@@ -25,7 +25,7 @@ function getLoop(){
 			else if (hid == 3) protoDetail1();
 			else if (hid == 4) protoDetail2();
 		}
-	}, 1000);
+	}, 2000);
 }
 
 function setPage(pageno){
@@ -153,6 +153,7 @@ function tabMove(){
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$('#top-nav > a').eq(0).addClass('active').siblings().removeClass('active');
+		$('.content-tab').removeClass('active').eq(0).addClass('active');
 		/*$(this).addClass('active').siblings().removeClass('active');
 		$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');*/
 	}
