@@ -2,9 +2,22 @@ $(document).on('click', '#barbtn', openCloseBar);
 $(document).on('click', '#top-nav > a', tabMove);
 $(document).on('click', '#btn-nav', openDrawer);
 $(document).on('click', '#drawer-close', closeDrawer);
+$(document).on('click', '#drawer-left > a', menuDrawer);
+$(document).on('click', '.drawer-menu > li.plus > a', menu2dpsDrawer);
+
+function menu2dpsDrawer(){
+	if ($(this).parent().hasClass('active')) $(this).parent().removeClass('active');
+	else $(this).parent().addClass('active');
+}
+
+function menuDrawer(){
+	$(this).addClass('active').siblings().removeClass('active');
+	$('.drawer-content').removeClass('active').eq($(this).index()).addClass('active');
+}
 
 function openDrawer(){
 	$('body').addClass('drawer');
+	$('#bar').removeClass('opened');
 }
 
 function closeDrawer(){
@@ -22,7 +35,6 @@ function openCloseBar(){
 }
 
 function tabMove(){
-	var ind = $(this).index();
 	$(this).addClass('active').siblings().removeClass('active');
-	$('.content-tab').removeClass('active').eq(ind).addClass('active');
+	$('.content-tab').removeClass('active').eq($(this).index()).addClass('active');
 }
