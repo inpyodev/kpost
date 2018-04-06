@@ -15,7 +15,7 @@ var uuid;
 
 function getPage(){
 	$.ajax({
-		url: 'http://116.39.0.146:5000/getScreen',
+		url: 'http://116.39.0.146:7777/getScreen',
 		type: 'POST',
 		data: uuid,
 		success: function(data){
