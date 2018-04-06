@@ -13,9 +13,10 @@ $(document).on('click', '#proto-final', protoFinal);
 
 var uuid;
 var hid = 0;
+var inter;
 
 function getLoop(){
-	setInterval(function(){
+	inter = setInterval(function(){
 		getPage();
 		if ($('#hidden').val() != hid){
 			hid = $('#hidden').val();
@@ -57,6 +58,7 @@ function getPage(){
 
 function protoFinal(){
 	$(this).addClass('highlighted');
+	clearInterval(inter);
 }
 
 function protoDetail1(){
@@ -107,6 +109,7 @@ function returnReload(){
 			uuid = data.uuid;
 			console.log(uuid, data.uuid)
 			closeDrawer();
+			getLoop();
 		},
 		error: function(error){
 			console.log(error)
