@@ -1,16 +1,15 @@
 import threading
 
 from flask import Flask, request
-from db import db, Request
+from db import db, KPostRequest
 import random
 import json
 import uuid
-from socket_server import KPostServer, ConnectionManager
+from socket_server import run_server, ConnectionManager
 
 app = Flask(__name__)
 db.create_all()
-kpserver = KPostServer()
-server_thread = threading.Thread(target=kpserver.run_server)
+server_thread = threading.Thread(target=run_server)
 server_thread.daemon = True
 server_thread.start()
 
@@ -26,7 +25,7 @@ def register():
     request_number = str(random.randint(0, 100000))
     uuid_num = str(uuid.uuid4())
 
-    req = Request(target_ip=request_ip, request_id=request_number, uuid=uuid_num)
+    req = KPostRequest(target_ip=request_ip, request_id=request_number, uuid=uuid_num)
     db.session.add(req)
     db.session.commit()
 
@@ -36,7 +35,7 @@ def register():
 @app.route('/connect', methods=["POST"])
 def connect():
     connect_id = request.form['connect_id']
-    req = Request.query \
+    req = KPostRequest.query \
         .filter_by(request_id=connect_id) \
         .first()
 
@@ -50,7 +49,7 @@ def connect():
 def send():
     uuid = request.form['uuid']
     message = request.form['message']
-    req = Request.query\
+    req = KPostRequest.query\
         .filter_by(uuid=uuid) \
         .first()
 

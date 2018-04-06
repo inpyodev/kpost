@@ -1,7 +1,7 @@
 import json
 import socketserver
 import threading
-from app import db
+from db import db, KPostRequest
 
 HOST = ''
 PORT = 7778
@@ -75,10 +75,8 @@ class TcpHandler(socketserver.BaseRequestHandler):
         print('[%s] 접속종료' % self.client_address[0])
 
 
-class KPostServer():
-    def run_server(self):
-        server = socketserver.TCPServer((HOST, PORT), TcpHandler)
-        server.serve_forever()
-
+def run_server():
+    server = socketserver.TCPServer((HOST, PORT), TcpHandler)
+    server.serve_forever()
 
 
