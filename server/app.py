@@ -26,7 +26,7 @@ def register():
     request_number = str(random.randint(0, 100000))
     uuid_num = str(uuid.uuid4())
 
-    req = KPostRequest(target_ip=request_ip, request_id=request_number, uuid=uuid_num, current_screen=1)
+    req = KPostRequest(target_ip=request_ip, request_id=request_number, uuid=uuid_num, current_screen=0)
     db.session.add(req)
     db.session.commit()
 
