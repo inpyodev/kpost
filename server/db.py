@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Workspace\\kpost\\server\\test.db' # For Windows
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Workspace\\kpost\\server\\kpost.db' # For Windows
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////kpost.db' # For Linux
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

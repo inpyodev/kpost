@@ -36,8 +36,8 @@ def register():
 @app.route('/connect', methods=["POST"])
 def connect():
     connect_id = request.form['connect_id']
-    req: Request = Request.query\
-        .filter_by(request_id=connect_id)\
+    req: Request = Request.query \
+        .filter_by(request_id=connect_id) \
         .first()
 
     req.request_id = ''
@@ -50,8 +50,8 @@ def connect():
 def send():
     uuid = request.form['uuid']
     message = request.form['message']
-    req: Request = Request.query\
-        .filter_by(uuid=uuid)\
+    req = Request.query\
+        .filter_by(uuid=uuid) \
         .first()
 
     conn = ConnectionManager()
