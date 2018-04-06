@@ -8,7 +8,7 @@ $(document).on('click', '.drawer-menu > li.plus > a', menu2dpsDrawer);
 $(document).on('click', '#kpa-submit', returnReload);
 
 function returnReload(){
-	var data = $('#connect_id').val();
+	var data = $('#kpa-form').serialize();
 	
 	$.ajax({
 		url: 'http://116.39.0.146:7777/connect',
