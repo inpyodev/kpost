@@ -3,7 +3,7 @@ import socketserver
 import threading
 from db import db, KPostRequest
 
-HOST = ''
+HOST = '0.0.0.0'
 PORT = 7778
 lock = threading.Lock()  # syncronized 동기화 진행하는 스레드 생성
 connections = {}
@@ -50,7 +50,7 @@ class ConnectionManager:
                 update_screen(unpack_msg['screen_update'])
 
         except Exception as e:
-            print(e)
+            print("Error" + e)
         print(msg)
 
 

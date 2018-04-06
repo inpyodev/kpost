@@ -1,7 +1,8 @@
 import socket
 from threading import Thread
 
-HOST = 'localhost'
+# HOST = 'localhost'
+HOST = '116.39.0.146'
 PORT = 7778
 
 

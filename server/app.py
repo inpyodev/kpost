@@ -3,11 +3,12 @@ import threading
 from flask import Flask, request
 from db import db, KPostRequest
 import random
-import json
+from flask_cors import CORS
 import uuid
 from socket_server import run_server, ConnectionManager
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 db.create_all()
 server_thread = threading.Thread(target=run_server)
 server_thread.daemon = True
