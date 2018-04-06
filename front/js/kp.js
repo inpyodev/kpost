@@ -13,6 +13,20 @@ $(document).on('click', '#proto-final', protoFinal);
 
 var uuid;
 
+function setPage(pageno){
+	$.ajax({
+		url: 'http://116.39.0.146:7777/send',
+		type: 'POST',
+		data: { 'uuid' : uuid, 'message' : pageno },
+		success: function(data){
+			console.log(data)
+		},
+		error: function(error){
+			console.log(error)
+		}
+	});
+}
+
 function getPage(){
 	$.ajax({
 		url: 'http://116.39.0.146:7777/getScreen',
@@ -115,6 +129,7 @@ function openCloseBar(){
 function tabMove(){
 	if ($('.highlighted').length == 0){
 		$(this).addClass('highlighted');
+		setPage(1);
 	} else {
 		$('.highlighted').removeClass('highlighted');
 		$(this).addClass('active').siblings().removeClass('active');
